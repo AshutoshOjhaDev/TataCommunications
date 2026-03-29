@@ -1,0 +1,94 @@
+<template>
+    <div class="slds-p-around_large">
+
+        <!-- HEADER -->
+        <section class="slds-m-bottom_large">
+            <h1 class="slds-text-heading_large">Partner Onboarding</h1>
+            <p class="slds-text-body_regular">
+                Complete your onboarding journey to get full access.
+            </p>
+        </section>
+
+        <!-- SUCCESS MESSAGE -->
+        <template if:true={onboardingCompleted}>
+            <div class="slds-notify slds-notify_alert slds-theme_success slds-m-bottom_large">
+                <span class="slds-assistive-text">Success</span>
+                You have successfully completed all onboarding steps!
+            </div>
+        </template>
+
+        <!-- STEPS GRID -->
+        <div class="slds-grid slds-wrap slds-gutters slds-grid_vertical-stretch">
+
+            <!-- STEP 1 -->
+            <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-3 slds-grid">
+                <div class="slds-box slds-theme_default slds-p-around_large
+                            slds-grid slds-grid_vertical slds-grow">
+
+                    <h2 class="slds-text-heading_medium">Step 1 – Introduction</h2>
+
+                    <template if:true={isStep1Active}>
+                        <video width="100%" controls onended={handleVideoComplete}>
+                            <source src={videoUrl} type="video/mp4" />
+                        </video>
+                    </template>
+
+                    <lightning-button
+                        class="slds-m-top_medium"
+                        label="Start Step 1"
+                        variant={step1Variant}
+                        disabled={step1Disabled}
+                        onclick={handleStep1}>
+                    </lightning-button>
+                </div>
+            </div>
+
+            <!-- STEP 2 -->
+            <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-3 slds-grid">
+                <div class="slds-box slds-theme_default slds-p-around_large
+                            slds-grid slds-grid_vertical slds-grow">
+
+                    <h2 class="slds-text-heading_medium">Step 2 – Review Resources</h2>
+
+                    <template if:true={isStep2Active}>
+                        <video width="100%" controls onended={handleVideoComplete}>
+                            <source src={videoUrl} type="video/mp4" />
+                        </video>
+                    </template>
+
+                    <lightning-button
+                        class="slds-m-top_medium"
+                        label="Start Step 2"
+                        variant={step2Variant}
+                        disabled={step2Disabled}
+                        onclick={handleStep2}>
+                    </lightning-button>
+                </div>
+            </div>
+
+            <!-- STEP 3 -->
+            <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-3 slds-grid">
+                <div class="slds-box slds-theme_default slds-p-around_large
+                            slds-grid slds-grid_vertical slds-grow">
+
+                    <h2 class="slds-text-heading_medium">Step 3 – Final Setup</h2>
+
+                    <template if:true={isStep3Active}>
+                        <video width="100%" controls onended={handleVideoComplete}>
+                            <source src={videoUrl} type="video/mp4" />
+                        </video>
+                    </template>
+
+                    <lightning-button
+                        class="slds-m-top_medium"
+                        label="Final Step 3"
+                        variant={step3Variant}
+                        disabled={step3Disabled}
+                        onclick={handleStep3}>
+                    </lightning-button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</template>
