@@ -1,0 +1,197 @@
+<template>
+    <div class="slds-p-around_large">
+
+        <!-- HEADER -->
+        <section class="slds-m-bottom_large">
+            <h1 class="slds-text-heading_large">Partner Learning Hub</h1>
+            <p class="slds-text-body_regular">
+                Training and enablement resources to help partners succeed.
+            </p>
+        </section>
+
+        <div class="slds-grid slds-wrap slds-gutters">
+
+            <!-- LEFT CONTENT -->
+            <div class="slds-col slds-size_1-of-1 slds-large-size_8-of-12">
+
+                <!-- GETTING STARTED -->
+                <template if:true={gettingStarted.length}>
+                    <section class="slds-m-bottom_x-large">
+                        <h2 class="slds-text-heading_medium slds-m-bottom_medium">
+                            Getting Started
+                        </h2>
+
+                        <div class="slds-grid slds-wrap slds-gutters slds-grid_vertical-stretch">
+                            <template for:each={gettingStarted} for:item="item">
+                                <div key={item.Id}
+                                     class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-m-bottom_medium slds-grid">
+
+                                    <div class="slds-card slds-p-around_medium slds-grid slds-grid_vertical slds-grow">
+                                        <div class="slds-grow">
+                                            <h3 class="slds-text-heading_small">{item.Name}</h3>
+                                            <p class="slds-text-body_small slds-m-top_x-small">
+                                                {item.Description__c}
+                                            </p>
+                                        </div>
+
+                                        <lightning-button
+                                            class="slds-m-top_medium"
+                                            label="Watch"
+                                            variant="brand"
+                                            onclick={openVideo}>
+                                        </lightning-button>
+                                    </div>
+
+                                </div>
+                            </template>
+                        </div>
+                    </section>
+                </template>
+
+                <!-- SALES TRAINING -->
+                <template if:true={sales.length}>
+                    <section class="slds-m-bottom_x-large">
+                        <h2 class="slds-text-heading_medium slds-m-bottom_medium">
+                            Sales Training
+                        </h2>
+
+                        <div class="slds-grid slds-wrap slds-gutters slds-grid_vertical-stretch">
+                            <template for:each={sales} for:item="item">
+                                <div key={item.Id}
+                                     class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-m-bottom_medium slds-grid">
+
+                                    <div class="slds-card slds-p-around_medium slds-grid slds-grid_vertical slds-grow">
+                                        <div class="slds-grow">
+                                            <h3 class="slds-text-heading_small">{item.Name}</h3>
+                                            <p class="slds-text-body_small slds-m-top_x-small">
+                                                {item.Description__c}
+                                            </p>
+                                        </div>
+
+                                        <lightning-button
+                                            class="slds-m-top_medium"
+                                            label="Start Learning"
+                                            variant="brand-outline"
+                                            onclick={openVideo}>
+                                        </lightning-button>
+                                    </div>
+
+                                </div>
+                            </template>
+                        </div>
+                    </section>
+                </template>
+
+                <!-- PROCESS & HOW-TO -->
+                <template if:true={process.length}>
+                    <section class="slds-m-bottom_x-large">
+                        <h2 class="slds-text-heading_medium slds-m-bottom_medium">
+                            Process &amp; How-To
+                        </h2>
+
+                        <div class="slds-grid slds-wrap slds-gutters slds-grid_vertical-stretch">
+                            <template for:each={process} for:item="item">
+                                <div key={item.Id}
+                                     class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-m-bottom_medium slds-grid">
+
+                                    <div class="slds-card slds-p-around_medium slds-grid slds-grid_vertical slds-grow">
+                                        <div class="slds-grow">
+                                            <h3 class="slds-text-heading_small">{item.Name}</h3>
+                                            <p class="slds-text-body_small slds-m-top_x-small">
+                                                {item.Description__c}
+                                            </p>
+                                        </div>
+
+                                        <lightning-button
+                                            class="slds-m-top_medium"
+                                            label="View"
+                                            variant="neutral"
+                                            onclick={openVideo}>
+                                        </lightning-button>
+                                    </div>
+
+                                </div>
+                            </template>
+                        </div>
+                    </section>
+                </template>
+
+            </div>
+
+            <!-- RIGHT PANEL -->
+            <div class="slds-col slds-size_1-of-1 slds-large-size_4-of-12">
+
+                <!-- QUICK ACTIONS -->
+                <article class="slds-card slds-m-bottom_large">
+                    <div class="slds-card__header slds-p-around_medium">
+                        <h3 class="slds-text-heading_small">Quick Actions</h3>
+                    </div>
+                    <div class="slds-card__body slds-p-around_medium">
+                        <ul class="slds-list_vertical slds-has-dividers">
+                            <li class="slds-p-vertical_x-small">
+                                <a href="/s/support" target="_blank">Raise Partner Support Request</a>
+                            </li>
+                            <li class="slds-p-vertical_x-small">
+                                <a href="/s/lead/Lead/Default" target="_blank">Register New Customer Lead</a>
+                            </li>
+                            <li class="slds-p-vertical_x-small">
+                                <a href="/s/opportunity/Opportunity/Recent" target="_blank">Track Active Opportunities</a>
+                            </li>
+                        </ul>
+                    </div>
+                </article>
+
+                <!-- TATA COMMUNICATIONS LINKS -->
+                <article class="slds-card">
+                    <div class="slds-card__header slds-p-around_medium">
+                        <h3 class="slds-text-heading_small">Tata Communications Resources</h3>
+                    </div>
+                    <div class="slds-card__body slds-p-around_medium">
+                        <ul class="slds-list_vertical slds-has-dividers">
+                            <li class="slds-p-vertical_small">
+                                <a href="https://www.tatacommunications.com" target="_blank">
+                                    Official Website
+                                </a>
+                            </li>
+                            <li class="slds-p-vertical_small">
+                                <a href="https://www.tatacommunications.com/solutions/" target="_blank">
+                                    Products &amp; Solutions
+                                </a>
+                            </li>
+                            <li class="slds-p-vertical_small">
+                                <a href="https://www.tatacommunications.com/resources/" target="_blank">
+                                    Whitepapers &amp; Case Studies
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+
+        <!-- VIDEO MODAL -->
+        <template if:true={showModal}>
+            <section role="dialog" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <lightning-button-icon
+                            icon-name="utility:close"
+                            class="slds-modal__close"
+                            onclick={closeModal}>
+                        </lightning-button-icon>
+                        <h2 class="slds-text-heading_medium">Learning Video</h2>
+                    </header>
+
+                    <div class="slds-modal__content slds-p-around_medium">
+                        <video width="100%" height="400" controls>
+                            <source src={currentVideoUrl} type="video/mp4" />
+                        </video>
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+
+    </div>
+</template>
