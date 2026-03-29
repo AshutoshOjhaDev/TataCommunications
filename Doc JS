@@ -1,0 +1,68 @@
+import { LightningElement, wire } from 'lwc';
+import getLoggedInUserContactFiles
+    from '@salesforce/apex/ContactFilesController.getLoggedInUserContactFiles';
+
+export default class ContactFiles extends LightningElement {
+
+    files;
+    error;
+    isLoading = true;
+
+    columns = [
+        { label: 'File Name', fieldName: 'title', type: 'text' },
+        { label: 'Type', fieldName: 'fileType', type: 'text' },
+        {
+            label: 'Preview',
+            type: 'button',
+            typeAttributes: {
+                label: 'Preview',
+                name: 'preview',
+                variant: 'brand'
+            }
+        },
+        {
+            label: 'Download',
+            type: 'button',
+            typeAttributes: {
+                label: 'Download',
+                name: 'download'
+            }
+        }
+    ];
+
+    @wire(getLoggedInUserContactFiles)
+    wiredFiles({ data, error }) {
+        this.isLoading = false;
+
+        if (data) {
+            this.files = data;
+            this.error = undefined;
+        } else if (error) {
+            this.error = error.body?.message || 'Unable to load documents';
+            this.files = undefined;
+        }
+    }
+
+    get noData() {
+        return !this.isLoading && this.files && this.files.length === 0;
+    }
+
+    handleRowAction(event) {
+        const action = event.detail.action.name;
+        const row = event.detail.row;
+
+        if (action === 'preview') {
+            window.open(
+                `/sfc/servlet.shepherd/version/renditionDownload?rendition=THUMB720BY480&versionId=${row.versionId}`,
+                '_blank'
+            );
+        }
+
+        if (action === 'download') {
+            window.open(
+                `/sfc/servlet.shepherd/version/download/${row.versionId}`,
+                '_blank'
+            );
+        }
+    }
+}
