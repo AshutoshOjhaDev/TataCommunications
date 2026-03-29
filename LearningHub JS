@@ -1,0 +1,45 @@
+import { LightningElement, wire, track } from 'lwc';
+import getLearningContent
+    from '@salesforce/apex/PartnerLearningController.getLearningContent';
+
+// Static Resource video
+import sampleVideo from '@salesforce/resourceUrl/SampleVideo';
+
+export default class LearningHub extends LightningElement {
+
+    @track records = [];
+    @track showModal = false;
+    @track currentVideoUrl;
+
+    @wire(getLearningContent)
+    wiredLearning({ data, error }) {
+        if (data) {
+            this.records = data;
+        } else {
+            this.records = [];
+            console.error(error);
+        }
+    }
+
+    get gettingStarted() {
+        return this.records.filter(r => r.Category__c === 'Getting Started');
+    }
+
+    get sales() {
+        return this.records.filter(r => r.Category__c === 'Sales');
+    }
+
+    get process() {
+        return this.records.filter(r => r.Category__c === 'Process');
+    }
+
+    openVideo() {
+        this.currentVideoUrl = sampleVideo;
+        this.showModal = true;
+    }
+
+    closeModal() {
+        this.showModal = false;
+        this.currentVideoUrl = null;
+    }
+}
