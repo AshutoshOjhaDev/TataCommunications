@@ -1,0 +1,89 @@
+import { LightningElement, track } from 'lwc';
+import getUserStepCount from '@salesforce/apex/OnboardingController.getUserStepCount';
+import incrementStep from '@salesforce/apex/OnboardingController.incrementStep';
+import SAMPLE_VIDEO from '@salesforce/resourceUrl/SampleVideo';
+
+export default class OnboardingSteps extends LightningElement {
+
+    @track stepCount = 0;
+    @track activeStep = null;
+    @track onboardingCompleted = false;
+
+    connectedCallback() {
+        this.loadSteps();
+    }
+
+    async loadSteps() {
+        this.stepCount = await getUserStepCount();
+        this.onboardingCompleted = this.stepCount >= 3;
+        this.activeStep = null;
+    }
+
+    // ================= VIDEO =================
+    get videoUrl() {
+        return SAMPLE_VIDEO;
+    }
+
+    // ================= ACTIVE STEP =================
+    get isStep1Active() {
+        return this.activeStep === 1;
+    }
+
+    get isStep2Active() {
+        return this.activeStep === 2;
+    }
+
+    get isStep3Active() {
+        return this.activeStep === 3;
+    }
+
+    // ================= BUTTON STATES =================
+    get step1Disabled() {
+        return this.stepCount !== 0 || this.activeStep !== null;
+    }
+
+    get step2Disabled() {
+        return this.stepCount !== 1 || this.activeStep !== null;
+    }
+
+    get step3Disabled() {
+        return this.stepCount !== 2 || this.activeStep !== null;
+    }
+
+    get step1Variant() {
+        return this.stepCount === 0 ? 'brand' : 'neutral';
+    }
+
+    get step2Variant() {
+        return this.stepCount === 1 ? 'brand' : 'neutral';
+    }
+
+    get step3Variant() {
+        return this.stepCount === 2 ? 'brand' : 'neutral';
+    }
+
+    // ================= CLICK HANDLERS =================
+    handleStep1() {
+        this.activeStep = 1;
+    }
+
+    handleStep2() {
+        this.activeStep = 2;
+    }
+
+    handleStep3() {
+        this.activeStep = 3;
+    }
+
+    // ================= VIDEO COMPLETE =================
+    async handleVideoComplete() {
+        this.activeStep = null;
+        await incrementStep();
+        await this.loadSteps();
+
+        // FULL PAGE REFRESH AFTER FINAL STEP
+        if (this.stepCount >= 3) {
+            window.location.reload();
+        }
+    }
+}
